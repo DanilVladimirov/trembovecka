@@ -1,0 +1,20 @@
+.create-from {
+    width: 500px;
+    display: grid;
+    margin: auto;
+    padding: 10px;
+    margin-top: 10px;
+    border: 2px solid;
+}
+
+.create-from input {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.create-from textarea {
+    max-width: 494px;
+    min-width: 494px;
+    height: 100px;
+    font-size: 18px;
+}

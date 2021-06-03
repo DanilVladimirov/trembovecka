@@ -1,0 +1,44 @@
+.button {
+    color: white;
+    background-color: #3a8ac7;
+    border: 2px solid #3a8ac7;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    padding: 10px;
+    width: 150px;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: white;
+    border-color: #3a8ac7;
+    color: #3a8ac7;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.message {
+    border: 2px solid;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.message hr {
+    border: 1px solid #3a8ac7;
+}
+
+.reply-form {
+    padding: 10px;
+    border: 2px solid;
+    display: inline-grid;
+    margin-bottom: 10px;
+    width: 976px;
+}
+
+.reply-form textarea {
+    max-width: 970px;
+    min-width: 970px;
+    width: 970px;
+    font-size: 18px;
+}
+

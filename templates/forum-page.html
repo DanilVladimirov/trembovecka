@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/forum-style.css">
+{% endblock %}
+
+
+{% block body %}
+    <h1 style="text-align: center;">Форум</h1>
+    <div class="control">
+        <form style="display:flex;" method="post">
+            {% csrf_token %}
+            <input type="text" name="q">
+            <button class="button" type="submit">Пошук</button>
+        </form>
+        <button class="button" onclick="location.href='{% url 'create_theme' %}'"
+                style="margin-left: 20px;">
+            Створити тему
+        </button>
+    </div>
+
+    <div style="width: 1000px;margin: auto;">
+        {% for theme in themes %}
+            <div class="theme">
+                <a href="{% url 'forum_theme' theme.id %}">{{ theme.title }}</a>
+                <span style="float: right;">{{ theme.author.first_name }} {{ theme.author.last_name }}</span>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

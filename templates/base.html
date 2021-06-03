@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>var scrf_token = $('{% csrf_token %}').val(); </script>
+    <meta charset="UTF-8">
+    <title>site</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0 0 10px rgb(0 0 0 / 50%);
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #3a8ac7;
+            color: white;
+        }
+
+        .active {
+            background-color: white;
+            color: #3a8ac7;
+        }
+
+        .active:hover {
+            background-color: white;
+            color: black;
+        }
+    </style>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<ul>
+    <li><a href="{% url 'main_page' %}">Головна</a></li>
+    <li><a href="{% url 'files_page' %}">Студентам</a></li>
+    <li><a href="{% url 'news_page' %}">Події і новини</a></li>
+    <li><a href="#">Моя група</a></li>
+    <li><a href="{% url 'forum_page' %}">Форум</a></li>
+    {% if request.user.is_authenticated %}
+        <li style="float:right"><a class="active" href="{% url 'logout_page' %}">вийти</a></li>
+    {% else %}
+        <li style="float:right"><a class="active" href="{% url 'login_page' %}">ввійти</a></li>
+    {% endif %}
+
+</ul>
+<div style="min-height: 820px;">
+    {% block body %}
+
+    {% endblock %}
+</div>
+<div style="margin-top: 20px;padding: 10px;font-size: 15px;background: #3a8ac7;color: white;text-align: justify;">
+    На сайті представлені як власні розробки, так і файли і інформація, знайдені в мережі Інтернет (як вільно
+    поширювані)
+    або в навчально-методичній літературі.
+    Всі матеріали призначені виключно для читання з метою освіти та не носять комерційного характеру.
+    Автор сайту не претендує на авторство всіх представлених матеріалів. Якщо Ви є правовласником будь-якого
+    інформаційного продукту, і умови, на яких вони представлені на даному сайті, не відповідають Вашим вимогам, прохання
+    негайно повідомити - з метою усунення порушення авторського права.
+    При використанні авторських матеріалів посилання на автора обов'язкове.
+    <div style="text-align: center;">2021 (c)</div>
+</div>
+</body>
+</html>

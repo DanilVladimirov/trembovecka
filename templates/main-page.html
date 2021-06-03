@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/main-page-style.css">
+{% endblock %}
+
+{% block body %}
+    <div class="header-div">
+        <div class="header-content-div">
+            {% if request.user.is_superuser %}
+                <button onclick="location.href='admin/'" class="button-login">адмінка</button>
+            {% endif %}
+            <div class="header-text-div">
+                <span class="header-title">Трембовецька Тетяна Василівна</span><br>
+                <div class="header-text">викладач вищої категорії</div>
+            </div>
+            <div class="logo-div">
+                <img src="/static/imgs/Trembovetska.jpg">
+            </div>
+        </div>
+        <img class="header-background" src="/static/imgs/chpt.png">
+    </div>
+    <div class="about-div">
+        <div class="about-title">ПРО МЕНЕ</div>
+        <div>
+            <hr class="line">
+        </div>
+        <div class="about-text">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.
+        </div>
+        <div class="about-buttons-div">
+            <div class="about-buttons">
+                <div onclick="location.href='{% url 'contact_page' %}'" class="button-circle">
+                    <img style="margin-left: 9px;" src="/static/imgs/notes_white.png">
+                    <div style="color: white">консультації</div>
+                </div>
+                <div onclick="location.href='{% url 'files_page' %}'" class="button-circle"><img
+                        src="/static/imgs/files_white.png">
+                    <div style="color: white">файли</div>
+                </div>
+                <div class="button-circle"
+                     onclick="location.href='https://www.polytechnic.ck.ua/ciklova-komisiya-kompyuternih-i-matematichnih-disciplin'">
+                    <img style="width: 70px;margin-top: 26px;"
+                         src="/static/imgs/chpt_logo.png">
+                    <div style="color: white">чпфк</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

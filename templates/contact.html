@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/contact-page-style.css">
+{% endblock %}
+{% block body %}
+    <div>
+        <div style="text-align: center;margin-top: 10px;font-size: 20px;font-weight: bold;">Записатись на консультацію</div>
+        <div id="info" style="text-align: center;color: limegreen;"></div>
+        <form class="form-register" method="post" id="register_cons">
+            {% csrf_token %}
+            <select name="date">
+                <option>виберіть дату та час</option>
+                {% for date in dates %}
+                    <option value="{{ date.id }}">{{ date.day }} - {{ date.time|time:"H:i" }}</option>
+                {% endfor %}
+            </select>
+            <input type="text" name="group" placeholder="Группа" required>
+            <input type="text" name="full_name" placeholder="ПІБ"
+                   value="{{ request.user.first_name }} {{ request.user.last_name }}" required>
+            <input type="email" name="mail" placeholder="пошта" value="{{ request.user.email }}" required>
+            <button type="submit">записатись</button>
+        </form>
+    </div>
+
+    <script>
+        $('#register_cons').submit(function (e) {
+            e.preventDefault();
+            $form = $(this)
+            var formData = new FormData(this);
+            $.ajax({
+                url: {% url 'register_cons' %},
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        $('#register_cons')[0].reset();
+                        $('#info').text("ви записані");
+                    } else {
+
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+    </script>
+{% endblock %}

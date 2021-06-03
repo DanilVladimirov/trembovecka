@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/main-page-style.css">
+{% endblock %}
+
+{% block body %}
+    <div style="margin-top: 20px;">
+        <div style="text-align: center;font-size: 20px;">БЛОГ</div>
+        <div>
+            <hr class="line">
+        </div>
+        {% if request.user.is_superuser %}
+            <div>
+                <form id="post_create" class="create-post" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" placeholder="заголовок" name="title" required>
+                    <textarea placeholder="текст" name="text" required></textarea>
+                    <span>Додати зображення </span><input type="file" accept="image/*" name="photo" id="id_photo">
+                    <button type="submit">створити</button>
+                </form>
+            </div>
+        {% endif %}
+        <div>
+            <div id="posts">
+                {% for post in posts %}
+                    <div class="post" id="post_{{ post.id }}">
+                        <div class="title-div-post">
+                            <span><b>{{ post.title }}</b></span>
+                            {% if request.user.is_superuser %}
+                                <button class="button-del" onclick="del_post({{ post.id }})">видалити
+                                </button>{% endif %}
+                        </div>
+                        <hr>
+                        {{ post.text | safe }}
+                        <div class="post-img">
+                            {% if post.photo %}
+                                <img src="{{ post.photo.url }}">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#post_create').submit(function (e) {
+            e.preventDefault();
+            $form = $(this)
+            var formData = new FormData(this);
+            $.ajax({
+                url: {% url 'create_post' %},
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        $('#post_create')[0].reset();
+                        $new_post = $('<div class="post" id="post_' + response.pid + '"> <div class="title-div-post" ><span><b>' + response.title + '</b></span> <button class="button-del" onclick="del_post(' + response.pid + ')">видалити</button></div> <hr>' + response.text + '<div class="post-img"> <img src="' + response.photo + '"> </div> </div>');
+                        var wall = document.getElementById('posts');
+                        var first = wall.childNodes[0];
+                        $new_post.insertBefore(first)
+                    } else {
+                        $('#post_create')[0].reset();
+                        $new_post = $('<div class="post" id="post_' + response.pid + '"> <div class="title-div-post" ><span><b>' + response.title + '</b></span> <button class="button-del" onclick="del_post(' + response.pid + ')">видалити</button></div> <hr>' + response.text + '<div class="post-img"></div> </div>');
+                        var wall = document.getElementById('posts');
+                        var first = wall.childNodes[0];
+                        $new_post.insertBefore(first)
+                    }
+                },
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        });
+
+        function del_post(post_id) {
+            $.ajax({
+                type: 'POST', url: '{% url "del_post" %}',
+                data: {'csrfmiddlewaretoken': scrf_token, 'post_id': post_id},
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                    if (data.success) {
+                        var post = "#post_" + post_id;
+                        $(post).remove();
+                    } else {
+
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

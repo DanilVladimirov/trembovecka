@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/files-page-style.css">
+{% endblock %}
+{% block body %}
+    <div style="text-align: center;margin-top: 10px;font-size: 30px;font-weight: bold;">Студентам</div>
+    <div class="main-div">
+        {% for category in categories %}
+        <div class="category">
+            <a href="{% url 'category_page' category.id %}">{{ category.title }}</a>
+            <hr>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

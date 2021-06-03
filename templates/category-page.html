@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/files-page-style.css">
+{% endblock %}
+
+{% block body %}
+    <div style="margin: 10px 0px 10px 10px;font-size: 20px;"><a href="{% url 'files_page' %}">повернутись до
+        категорій</a></div>
+    <div style="text-align: center;margin-top: 10px;font-size: 20px;">ФАЙЛИ</div>
+    <div class="main-div">
+        {% for file in files %}
+            <div class="category">
+                <span>{{ file.title }}</span><a style="float:right;" href="{{ file.url.url }}">завантажити</a>
+                <hr>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

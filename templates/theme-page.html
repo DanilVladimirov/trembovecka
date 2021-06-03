@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/theme-style.css">
+{% endblock %}
+
+
+{% block body %}
+    <div style="font-size: 30px;font-weight: bold;text-align: center;margin-top: 10px;">{{ theme.title }}</div>
+    <div style="width: 1000px;margin: auto;">
+        <div class="message">
+            <div style="font-weight: bold;">{{ theme.author.first_name }} {{ theme.author.last_name }}</div>
+            <hr>
+            <div>{{ theme.text }}</div>
+        </div>
+        <form method="post" class="reply-form">
+            {% csrf_token %}
+            <textarea placeholder="ваша відповідь" required name="text"></textarea>
+            <button class="button">відповісти</button>
+        </form>
+        <div>
+            {% for message in theme.message.all %}
+                <div class="message">
+                    <div style="font-weight: bold;">{{ message.author.first_name }} {{ message.author.last_name }}</div>
+                    <hr>
+                    <div>{{ message.text }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

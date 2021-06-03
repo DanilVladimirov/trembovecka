@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/create-theme-style.css">
+    <link rel="stylesheet" href="/static/css/theme-style.css">
+{% endblock %}
+
+
+{% block body %}
+    <div style="font-size: 20px;font-weight: bold;margin-top: 10px;text-align: center;">Створення теми</div>
+    <form method="post" class="create-from">
+        {% csrf_token %}
+        <input name="title" placeholder="Тема" required>
+        <textarea name="text" placeholder="Ваше питання"></textarea>
+        <button class="button">Створити</button>
+    </form>
+{% endblock %}
