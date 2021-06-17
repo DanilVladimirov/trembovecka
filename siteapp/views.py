@@ -11,8 +11,11 @@ from trembovetska.settings import EMAIL_HOST_USER
 
 
 def main_page(request):
-
-    return render(request, 'main-page.html')
+    context = {}
+    text_main = StartPage.objects.filter()
+    if text_main.exists():
+        context = {'text_main': text_main[0]}
+    return render(request, 'main-page.html', context)
 
 
 def create_post(request):
@@ -121,6 +124,7 @@ def forum_page(request):
         context = {'themes': themes}
     return render(request, 'forum-page.html', context)
 
+
 @login_required(login_url='login_page')
 def forum_create_theme(request):
     if request.POST:
@@ -151,3 +155,14 @@ def news_page(request):
     posts = Post.objects.order_by('-id')
     context.update({'posts': posts})
     return render(request, 'news-page.html', context)
+
+
+def about_group(request):
+    context = {}
+    group = GroupPage.objects.filter()
+    if len(group) >= 1:
+        context.update({'group': group[0]})
+    achivements = Post.objects.filter(type_post='achive')
+    context.update({'posts': achivements})
+
+    return render(request, 'group-page.html', context)

@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import gdown
 from google.oauth2 import service_account
+import django_heroku
 
 load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django_extensions',
     'storages',
     'siteapp'
 ]
@@ -139,3 +140,10 @@ EMAIL_HOST_USER = 'makrosrytp@gmail.com'
 EMAIL_HOST_PASSWORD = 'vla01rov02'
 
 LOGIN_REDIRECT_URL = '/'
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
+
+django_heroku.settings(locals())

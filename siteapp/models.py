@@ -13,9 +13,14 @@ def file_path(instance, filename):
 
 
 class Post(models.Model):
+    CHOICES = (
+        ('main', 'новина'),
+        ('achive', 'досягнення')
+    )
     title = models.CharField(max_length=50, default='', blank=True)
     text = models.TextField(default='', blank=True)
     photo = models.ImageField(upload_to=file_path, default=None, null=True, blank=True)
+    type_post = models.CharField(choices=CHOICES, default='', max_length=50)
 
     def __str__(self):
         return self.title
@@ -74,3 +79,18 @@ class Theme(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class GroupPage(models.Model):
+    main_img = models.ImageField(upload_to=file_path)
+    text = models.TextField(default='')
+
+    def __str__(self):
+        return 'сторінка групи'
+
+
+class StartPage(models.Model):
+    text = models.TextField(default='')
+
+    def __str__(self):
+        return 'головна сторінка'

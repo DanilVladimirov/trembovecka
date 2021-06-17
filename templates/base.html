@@ -57,7 +57,7 @@
     <li><a href="{% url 'main_page' %}">Головна</a></li>
     <li><a href="{% url 'files_page' %}">Студентам</a></li>
     <li><a href="{% url 'news_page' %}">Події і новини</a></li>
-    <li><a href="#">Моя група</a></li>
+    <li><a href="{% url 'group_page' %}">Моя група</a></li>
     <li><a href="{% url 'forum_page' %}">Форум</a></li>
     {% if request.user.is_authenticated %}
         <li style="float:right"><a class="active" href="{% url 'logout_page' %}">вийти</a></li>

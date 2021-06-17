@@ -19,6 +19,7 @@ urlpatterns = [
     path('forum/', forum_page, name='forum_page'),
     path('create-theme/', forum_create_theme, name='create_theme'),
     path('forum-theme/<int:theme_id>/', forum_theme, name='forum_theme'),
-    path('news/', news_page, name='news_page')
+    path('news/', news_page, name='news_page'),
+    path('group/', about_group, name='group_page')
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

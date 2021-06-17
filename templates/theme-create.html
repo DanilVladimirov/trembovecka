@@ -11,7 +11,7 @@
     <form method="post" class="create-from">
         {% csrf_token %}
         <input name="title" placeholder="Тема" required>
-        <textarea name="text" placeholder="Ваше питання"></textarea>
+        <textarea name="text" placeholder="Ваше питання" required></textarea>
         <button class="button">Створити</button>
     </form>
 {% endblock %}
