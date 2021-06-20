@@ -27,7 +27,7 @@ class Post(models.Model):
 
 
 class File(models.Model):
-    title = models.CharField(max_length=50, default='', blank=True)
+    title = models.CharField(max_length=50, default='')
     url = models.FileField(upload_to=file_path, default=None, blank=True)
 
     def __str__(self):

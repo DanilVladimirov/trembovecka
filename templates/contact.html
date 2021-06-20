@@ -15,8 +15,7 @@
                 {% endfor %}
             </select>
             <input type="text" name="group" placeholder="Группа" required>
-            <input type="text" name="full_name" placeholder="ПІБ"
-                   value="{{ request.user.first_name }} {{ request.user.last_name }}" required>
+            <input type="text" name="full_name" placeholder="ПІБ" value="{{ request.user.first_name }} {{ request.user.last_name }}" required>
             <input type="email" name="mail" placeholder="пошта" value="{{ request.user.email }}" required>
             <button type="submit">записатись</button>
         </form>
