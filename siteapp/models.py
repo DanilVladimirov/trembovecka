@@ -13,6 +13,9 @@ def file_path(instance, filename):
 
 
 class Post(models.Model):
+    class Meta:
+        verbose_name = 'Новина'
+        verbose_name_plural = 'Події і Новини'
     CHOICES = (
         ('main', 'новина'),
         ('achive', 'досягнення')
@@ -27,6 +30,9 @@ class Post(models.Model):
 
 
 class File(models.Model):
+    class Meta:
+        verbose_name = 'Файл'
+        verbose_name_plural = 'Файли'
     title = models.CharField(max_length=50, default='')
     url = models.FileField(upload_to=file_path, default=None, blank=True)
 
@@ -35,6 +41,9 @@ class File(models.Model):
 
 
 class Category(models.Model):
+    class Meta:
+        verbose_name = 'Категорія'
+        verbose_name_plural = 'Категорії'
     title = models.CharField(max_length=50, default='', blank=True)
     files = models.ManyToManyField(File)
 
@@ -43,6 +52,9 @@ class Category(models.Model):
 
 
 class ConsultationDate(models.Model):
+    class Meta:
+        verbose_name = 'День консультації'
+        verbose_name_plural = 'Дні консультації'
     day = models.CharField(max_length=2)
     time = models.TimeField(default=None)
 
@@ -72,6 +84,9 @@ class Message(models.Model):
 
 
 class Theme(models.Model):
+    class Meta:
+        verbose_name = 'Тема'
+        verbose_name_plural = 'Теми'
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=250, default='')
     text = models.TextField(default='')
@@ -82,6 +97,9 @@ class Theme(models.Model):
 
 
 class GroupPage(models.Model):
+    class Meta:
+        verbose_name = 'Сторінка групи'
+        verbose_name_plural = 'Сторінка групи'
     main_img = models.ImageField(upload_to=file_path)
     text = models.TextField(default='')
 
@@ -90,6 +108,9 @@ class GroupPage(models.Model):
 
 
 class StartPage(models.Model):
+    class Meta:
+        verbose_name = 'Головна сторінка'
+        verbose_name_plural = 'Головна сторінка'
     text = models.TextField(default='')
 
     def __str__(self):

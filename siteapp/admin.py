@@ -4,7 +4,8 @@ from siteapp.models import (Post,
                             Category,
                             File,
                             GroupPage,
-                            StartPage)
+                            StartPage,
+                            Theme)
 
 admin.site.register(Post)
 admin.site.register(ConsultationDate)
@@ -12,3 +13,4 @@ admin.site.register(Category)
 admin.site.register(File)
 admin.site.register(GroupPage)
 admin.site.register(StartPage)
+admin.site.register(Theme)
